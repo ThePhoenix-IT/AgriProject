@@ -1,0 +1,16 @@
+version: '2'
+services:
+    agriproject-mongodb:
+        image: mongo:3.4.10
+        ports:
+            - "27017:27017"
+        command: mongos --configdb agriproject-mongodb-config
+    agriproject-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    agriproject-mongodb-config:
+        image: mongo:3.4.10
+        container_name: agriproject-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
