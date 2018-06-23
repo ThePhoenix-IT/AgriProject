@@ -1,19 +1,17 @@
-package com.thephoenix_it.agri.domain;
+package com.thephoenix_it.agri.service.dto;
 
+import com.thephoenix_it.agri.domain.Post;
+import com.thephoenix_it.agri.domain.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
- * A post.
+ * A DTO representing a post.
  */
-
-@org.springframework.data.mongodb.core.mapping.Document(collection = "jhi_post")
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "post")
-public class Post extends AbstractAuditingEntity implements Serializable {
+public class PostDTO {
 
 
     @Id
@@ -29,6 +27,9 @@ public class Post extends AbstractAuditingEntity implements Serializable {
 
     @Field("user_id")
     private User user;
+
+    public PostDTO(Post post) {
+    }
 
     public String getId() {
         return id;
